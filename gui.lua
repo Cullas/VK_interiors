@@ -1,3 +1,7 @@
+
+local Proxy = module("vrp", "lib/Proxy")
+vRP = Proxy.getInterface("vRP")
+
 gui_interiors = {
 	opened = false,
 	title = "",
@@ -170,7 +174,7 @@ Citizen.CreateThread(function()
         local ped = GetPlayerPed(-1)
         local playerPos = GetEntityCoords(ped, true)
         local vehicle = GetVehiclePedIsIn(ped, false)
-
+			if vRP.hasPermission({user_id,INTERIORS[id].permission})
         if (Vdist(playerPos.x, playerPos.y, playerPos.z, INTERIORS[POS_actual].x, INTERIORS[POS_actual].y, INTERIORS[POS_actual].z) > 2.0) then
 			if gui_interiors.opened then
 				gui_interiors_CloseMenu()
@@ -237,6 +241,6 @@ Citizen.CreateThread(function()
 				end
 			end
 		end
-
+	end
 	end
 end)
